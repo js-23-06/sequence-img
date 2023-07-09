@@ -1,5 +1,6 @@
 const num = 200;
 const mask = document.querySelector('aside');
+const delay = convertSpeed(mask);
 
 const imgDOM = createImgs('figure', num);
 
@@ -19,7 +20,7 @@ imgDOM.forEach((img) => {
 
 			setTimeout(() => {
 				mask.remove();
-			}, 2000);
+			}, delay);
 		}
 	};
 
@@ -44,6 +45,10 @@ function matchMove(arrEl, num, e) {
 	const percent = parseInt((e.clientX / window.innerWidth) * num);
 	for (const img of arrEl) img.style.visibility = 'hidden';
 	arrEl[percent].style.visibility = 'visible';
+}
+
+function convertSpeed(el) {
+	return parseFloat(getComputedStyle(el).transitionDuration) * 1000;
 }
 
 //DOM객체가 생성된 직후 DOM에 수반되는 소스 자료들을 가져오기 시작
