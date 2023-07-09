@@ -5,6 +5,9 @@ const imgDOM = createImgs('figure', num);
 
 let count = 0;
 
+//imgDOM이 생성되자마자 바로 반복을 돌면서
+//각 img요소에 소스이미지 로딩완료 유무를 onload이벤트로 확인
+//이후 소스이미지 로딩숫자값과 전체 이미지 갯수가 동일해지면 모든 이미지소스 로딩 완료처리
 imgDOM.forEach((img) => {
 	img.onload = () => {
 		count++;
@@ -12,6 +15,10 @@ imgDOM.forEach((img) => {
 		if (count === num) {
 			console.log('이미지소스 로딩 완료');
 		}
+	};
+
+	img.onerror = (e) => {
+		e.currentTarget.setAttribute('src', 'img/logo.png');
 	};
 });
 
