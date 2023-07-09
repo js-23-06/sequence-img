@@ -1,32 +1,31 @@
 const num = 200;
+const mask = document.querySelector('aside');
 
-//반환된 이미지를 전역변수에 담음
 const imgDOM = createImgs('figure', num);
 
 let count = 0;
 
-//imgDOM이 생성되자마자 바로 반복을 돌면서
-//각 img요소에 소스이미지 로딩완료 유무를 onload이벤트로 확인
-//이후 소스이미지 로딩숫자값과 전체 이미지 갯수가 동일해지면 모든 이미지소스 로딩 완료처리
 imgDOM.forEach((img) => {
 	img.onload = () => {
 		count++;
 		console.log(count);
 		if (count === num) {
 			console.log('이미지소스 로딩 완료');
+			mask.classList.add('off');
+
+			setTimeout(() => {
+				mask.remove();
+			}, 2000);
 		}
 	};
 
-	//해당 이미지요소에 소스이미지에 오류가 생기면 이벤트를 발생시켜서 대체 이미지 출력
 	img.onerror = (e) => {
 		e.currentTarget.setAttribute('src', 'img/logo.png');
 	};
 });
 
-//마우스 무브 이벤트 연결
 window.addEventListener('mousemove', (e) => matchMove(imgDOM, num, e));
 
-//동적으로 이미지 생성후 반환 함수
 function createImgs(targetEl, num) {
 	const frame = document.querySelector(targetEl);
 	let tags = '';
@@ -37,7 +36,6 @@ function createImgs(targetEl, num) {
 	return frame.querySelectorAll('img');
 }
 
-//마우스 포인터 위치에 따라 이미지 순서 매칭하는 함수
 function matchMove(arrEl, num, e) {
 	const percent = parseInt((e.clientX / window.innerWidth) * num);
 	for (const img of arrEl) img.style.visibility = 'hidden';
