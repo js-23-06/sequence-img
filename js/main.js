@@ -11,6 +11,7 @@ imgDOM.forEach((img) => {
 		const percent = parseInt((count / 200) * 100);
 		mask.querySelector('p').innerHTML = percent + '%';
 		mask.querySelector('.bar').style.width = percent + '%';
+		console.log(count);
 
 		if (count === num) {
 			console.log('이미지소스 로딩 완료');
