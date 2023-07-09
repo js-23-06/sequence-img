@@ -17,6 +17,7 @@ imgDOM.forEach((img) => {
 		}
 	};
 
+	//해당 이미지요소에 소스이미지에 오류가 생기면 이벤트를 발생시켜서 대체 이미지 출력
 	img.onerror = (e) => {
 		e.currentTarget.setAttribute('src', 'img/logo.png');
 	};
