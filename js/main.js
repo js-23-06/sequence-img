@@ -14,7 +14,7 @@ imgDOM.forEach((img) => {
 
 		if (count === num) {
 			console.log('이미지소스 로딩 완료');
-			mask.classList.add('off');
+			//mask.classList.add('off');
 
 			/*
 			setTimeout(() => {
