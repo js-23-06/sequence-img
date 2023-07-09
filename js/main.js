@@ -9,6 +9,14 @@ let tags = '';
 Array(num)
 	.fill()
 	.forEach((_, idx) => (tags += `<img src='img/pic${idx}.jpg' />`));
-
-console.log(tags);
 frame.innerHTML = tags;
+
+//브라우저에서 마우스 포인터를 움직일때마다 현재 포인터의 가로축 좌표값 출력
+//마우스가 움직일때마다 항상 1~200가 찍히는 200분율 변환
+//백분율 구하는 공식 (현재수치값 / 전체수치값) *100
+//이백분율 구하는 공식 (현재수치값 / 전체수치값) *200
+//브라우저 폭 구하느 공식 window.innerWidth
+window.addEventListener('mousemove', (e) => {
+	const percent = parseInt((e.clientX / window.innerWidth) * num);
+	console.log(percent);
+});
