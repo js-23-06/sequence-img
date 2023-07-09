@@ -16,9 +16,11 @@ imgDOM.forEach((img) => {
 			console.log('이미지소스 로딩 완료');
 			mask.classList.add('off');
 
+			/*
 			setTimeout(() => {
 				mask.remove();
 			}, 2000);
+			*/
 		}
 	};
 
