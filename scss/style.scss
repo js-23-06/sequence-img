@@ -34,6 +34,21 @@ aside {
 	color: #fff;
 	transition: 2s;
 
+	p {
+		position: relative;
+		top: -50px;
+		text-align: center;
+		width: 100%;
+	}
+	.bar {
+		width: 0%;
+		height: 2px;
+		background: #fff;
+		position: absolute;
+		left: 0%;
+		top: 50%;
+	}
+
 	&.off {
 		opacity: 0;
 	}
