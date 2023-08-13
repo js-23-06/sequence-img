@@ -3,7 +3,6 @@ let count = 0;
 const imgDOM = createImgs('figure', num);
 
 showMask();
-
 window.addEventListener('mousemove', (e) => matchMove(imgDOM, num, e));
 
 function showMask() {
