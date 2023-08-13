@@ -1,0 +1,3 @@
+class Sequence {
+	constructor(selector) {}
+}
