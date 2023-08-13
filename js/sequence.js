@@ -1,7 +1,15 @@
 class Sequence {
-	constructor(selector) {
-		this.num = 200;
+	#defOpt = { imgNum: 200, maskName: 'mask', imgUrl: 'img/pic', imgType: 'jpg' };
+	constructor(selector, opt) {
+		if (!selector) return console.error('선택자는 필수입력 항목입니다.');
+		const resultOpt = { ...this.#defOpt, ...opt };
+		console.log(resultOpt);
+		this.num = resultOpt.imgNum;
 		this.count = 0;
+		this.maskClassName = resultOpt.maskName;
+		this.imgUrl = resultOpt.imgUrl;
+		this.imgType = resultOpt.imgType;
+		//imtUrl, imgType이 읽힌 후에 createImgs함수를 호출
 		this.imgDOM = this.createImgs(selector, this.num);
 
 		this.showMask();
@@ -9,6 +17,7 @@ class Sequence {
 	}
 	showMask() {
 		const mask = document.createElement('aside');
+		mask.classList.add(this.maskClassName);
 		mask.style.transitionDuration = '0.5s';
 		const delay = this.convertSpeed(mask);
 		mask.innerHTML = `<p>0%</p><div class="bar"></div>`;
@@ -17,10 +26,10 @@ class Sequence {
 		this.imgDOM.forEach((img) => {
 			img.onload = () => {
 				this.count++;
-				const percent = parseInt((this.count / 200) * 100);
+				const percent = parseInt((this.count / this.num) * 100);
 				mask.querySelector('p').innerHTML = percent + '%';
 				mask.querySelector('.bar').style.width = percent + '%';
-				console.log(this.count);
+				//console.log(this.count);
 
 				if (this.count === this.num) {
 					console.log('이미지소스 로딩 완료');
@@ -39,11 +48,17 @@ class Sequence {
 	}
 	createImgs(targetEl, num) {
 		const frame = document.querySelector(targetEl);
+		console.log(this);
 		let tags = '';
 		Array(num)
 			.fill()
-			.forEach((_, idx) => (tags += `<img src='img/pic${idx}.jpg' />`));
+			.forEach((_, idx) => {
+				console.log(this);
+				//console.log(this.imgType);
+				tags += `<img src='${this.imgUrl}${idx}.${this.imgType}' />`;
+			});
 		frame.innerHTML = tags;
+		console.log(tags);
 		return frame.querySelectorAll('img');
 	}
 	matchMove(arrEl, num, e) {
